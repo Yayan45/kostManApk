@@ -66,7 +66,7 @@ if (!isset($_SESSION['akun_id'])) {
         <div class="sidebar-brand-icon">
           <i class="fas fa-home"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">kost pak Rudi</div>
+        <div class="sidebar-brand-text mx-3">KOSTMAN</div>
       </a>
 
       <!-- Divider -->
@@ -520,7 +520,7 @@ if (!isset($_SESSION['akun_id'])) {
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright &copy; kost pak rudi 2024</span>
+              <span>Copyright &copy; TechSolutions-2024</span>
             </div>
           </div>
         </footer>

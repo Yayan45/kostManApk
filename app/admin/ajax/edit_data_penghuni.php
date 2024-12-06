@@ -160,7 +160,7 @@ if (isset($_POST['id_profil'])) {
       </div>
       <div class="form-group">
         <label for="kontak_darurat">Kontak Darurat</label>
-        <input value="<?php echo $data['kontak_darurat_pengguna']; ?>" type="text" class="form-control" id="kontak_darurat" name="kontak_darurat"
+        <input value="<?php echo $data['kontak_darurat']; ?>" type="text" class="form-control" id="kontak_darurat" name="kontak_darurat"
           aria-describedby="kontak_darurat" placeholder="Masukkan Kontak darurat baru" required>
       </div>
       <div class="form-group">

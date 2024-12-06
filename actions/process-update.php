@@ -215,7 +215,7 @@ if (isset($_POST['update_info_kost'])) {
   $jKost = $_POST['jKost'];
   $alamat = $_POST['alamat'];
   $provinsi = $_POST['provinsi'];
-  $kontak_darurat = $_POST['kontak_darurat'];
+  $kota_kost = $_POST['kota'];
   $telepon = $_POST['telepon'];
   $email = $_POST['email'];
   $desc = $_POST['desc'];
@@ -232,7 +232,7 @@ if (isset($_POST['update_info_kost'])) {
     return false;
   }
 
-  $query = "UPDATE info_kost SET nama_kost = '$namaKost', jenis_kost = '$jKost', alamat_kost = '$alamat', provinsi_kost = '$provinsi', kontak_darurat = '$kontak_darurat', no_kost = '$telepon', email_kost = '$email', foto_kost = '$fotoKost', deskripsi_kost = '$desc' WHERE id_kost = '$id'";
+  $query = "UPDATE info_kost SET nama_kost = '$namaKost', jenis_kost = '$jKost', alamat_kost = '$alamat', provinsi_kost = '$provinsi', kota_kost = '$kota_kost', no_kost = '$telepon', email_kost = '$email', foto_kost = '$fotoKost', deskripsi_kost = '$desc' WHERE id_kost = '$id'";
 
   if (mysqli_query($conn, $query)) {
     echo "

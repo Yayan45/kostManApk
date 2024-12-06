@@ -81,8 +81,8 @@ if ($_GET['id_pembayaran']) {
       <tr>
         <td width="100%" colspan="4">
           <div align="center" class="style1"><strong><?php echo strtoupper($dataKost['nama_kost']); ?></strong><br>
-            <?php echo $dataKost['alamat_kost']; ?>, Telp <?php echo $dataKost['no_kost']; ?> <?php echo $dataKost['kota_kost']; ?> <?php echo $dataKost['provinsi_kost']; ?><br>
-            Website : indiekost.mif-project.com E-Mail : <?php echo $dataKost['email_kost']; ?> </div>
+            <?php echo $dataKost['alamat_kost']; ?>,<?php echo $dataKost['kota_kost']; ?>, <?php echo $dataKost['provinsi_kost']; ?><br>
+            Email : <?php echo $dataKost['email_kost']; ?>, Telp : <?php echo $dataKost['no_kost']; ?> </div>
         </td>
       <tr>
         <td colspan="4"></td>
