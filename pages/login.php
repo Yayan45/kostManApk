@@ -36,9 +36,6 @@ include '../actions/koneksi.php';
                 </div>
                 <button type="submit" name="submit_login" id="submit" class="btn btn-primary mb-2">Masuk</button>
                 <a href="../index.html" class="btn btn-danger">Kembali ke Homepage</a>
-                <div class="form-footer">
-                    <a href="#">Lupa Password?</a> | <a href="#">Buat Akun!</a>
-                </div>
             </form>
         </div>
     </div>

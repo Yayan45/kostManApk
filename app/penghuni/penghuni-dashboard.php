@@ -199,12 +199,13 @@ if (!isset($_SESSION['akun_id'])) {
                 while ($data = mysqli_fetch_array($result)) {
                   $id_menghuni = $data['id_menghuni'];
                   $tanggal_masuk = date('Y-m-d', strtotime($data['tanggal_masuk']));
-                  echo "<a href='#' class='list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 shadow-sm mb-3 rounded'>
+                  echo "<a href='penghuni-pembayaran.php' class='list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 shadow-sm mb-3 rounded'>
                   <div>
                       <h5 class='mb-1'>ID Menghuni: $id_menghuni</h5>
                       <small class='text-muted'>Tanggal Masuk: $tanggal_masuk</small>
                   </div>
-                  <span class='badge bg-success rounded-pill countdown' data-tanggal='$tanggal_masuk'></span>
+                  <span class='badge bg-success rounded-pill countdown' data-tanggal='$tanggal_masuk'>
+                  </span>
                 </a>";
                 }
               } else {
@@ -214,108 +215,6 @@ if (!isset($_SESSION['akun_id'])) {
             </div>
           </div>
 
-
-
-          <!-- <div class="row">
-            <div class="card col-12 mb-3">
-              <div class="card-body">
-                <h4 class="card-title">Profil</h4>
-                <p class="card-text">Detail data diri anda</p>
-                <?php
-                include '../../actions/koneksi.php';
-
-                if (isset($_SESSION['akun_id'])) {
-                  $id_pengguna = $_SESSION['akun_id'];
-                  $query = "SELECT * FROM pengguna WHERE id_pengguna = $id_pengguna";
-                  $result = mysqli_query($conn, $query);
-
-                  while ($data = mysqli_fetch_array($result)) {
-
-                ?>
-                    <div class="container-fluid pr-3">
-                      <img src="<?php echo '../../assets/img/uploadDb/' . $data['foto_pengguna']; ?>" class="img-thumbnail mx-auto d-block mb-3 rounded"
-                        width="300px">
-                      <div class="table-respomsive pr-3">
-                        <table class="table">
-                          <tbody>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">NIK</td>
-                              <td><?php
-                                  if ($data['no_ktp_pengguna'] == NULL) {
-                                    echo '<span class="font-italic">Belum Dilengkapi</span>';
-                                  } else {
-                                    echo $data['no_ktp_pengguna'];
-                                  } ?>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Nama</td>
-                              <td><?php echo $data['nama_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Telepon</td>
-                              <td><?php echo $data['telepon_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Email</td>
-                              <td><?php echo $data['email_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Tanggal Lahir</td>
-                              <td><?php
-                                  if ($data['tanggal_lahir_pengguna'] == '0000-00-00') {
-                                    echo '<span class="font-italic">Belum Dilengkapi</span>';
-                                  } else {
-                                    echo $data['tanggal_lahir_pengguna'];
-                                  } ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Jenis Kelamin</td>
-                              <td><?php
-                                  if ($data['kelamin_pengguna'] == NULL) {
-                                    echo '<span class="font-italic">Belum Dilengkapi</span>';
-                                  } else {
-                                    echo $data['kelamin_pengguna'];
-                                  } ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Alamat</td>
-                              <td><?php
-                                  if ($data['alamat_pengguna'] == NULL) {
-                                    echo '<span class="font-italic">Belum Dilengkapi</span>';
-                                  } else {
-                                    echo $data['alamat_pengguna'];
-                                  } ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Provinsi</td>
-                              <td><?php
-                                  if ($data['provinsi_pengguna'] == NULL) {
-                                    echo '<span class="font-italic">Belum Dilengkapi</span>';
-                                  } else {
-                                    echo $data['provinsi_pengguna'];
-                                  } ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Kontak Darurat</td>
-                              <td><?php
-                                  if ($data['kontak_darurat'] == NULL) {
-                                    echo '<span class="font-italic">Belum Dilengkapi</span>';
-                                  } else {
-                                    echo $data['kontak_darurat'];
-                                  } ?></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                <?php
-                  }
-                }
-                ?>
-              </div>
-            </div>
-          </div> -->
         </div>
         <!-- /.container-fluid -->
 
@@ -402,6 +301,7 @@ if (!isset($_SESSION['akun_id'])) {
 
       if (diffTime <= 0) {
         return "Sudah saatnya bayar kost!";
+
       }
 
       return `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;

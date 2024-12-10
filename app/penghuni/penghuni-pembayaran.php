@@ -321,7 +321,7 @@ if (!isset($_SESSION['akun_id'])) {
                           </tr>
                           <tr>
                             <td class="font-weight-bold" width="30%">Cara Pembayaran</td>
-                            <td class="font-weight-bold text-success">Lakukan pembayaran kamar offline (Melalui Teknisi Kost, dengan meminta struk pembayaran) atau transfer ke <br><br>(Rekening no. 143-001-389-2367 [MANDIRI] A.N. Suliha) <br><br> Foto/Scan Bukti pembayaran dan upload saat melakukan pembayaran</td>
+                            <td class="font-weight-bold text-success">Lakukan pembayaran kamar offline(menemui bapak rudi langsung) atau transfer ke <br><br>(Rekening no. 136-000-002-692-9 [MANDIRI] A.N. RUDY INDROYUWONO) <br><br> Foto/Scan Bukti pembayaran dan upload saat melakukan pembayaran</td>
                           </tr>
                         </tbody>
                       </table>
