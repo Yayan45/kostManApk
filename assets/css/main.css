@@ -206,7 +206,7 @@ h6 {
 /* Index Page Header
 ------------------------------*/
 .index-page .header {
-  --background-color: rgba(255, 255, 255, 0);
+
   --heading-color: #ffffff;
   --nav-color: #ffffff;
 }
@@ -223,6 +223,7 @@ h6 {
 /* Desktop Navigation */
 @media (min-width: 1200px) {
   .navmenu {
+    background-color: var(--heading-color);
     padding: 0;
   }
 
@@ -237,7 +238,6 @@ h6 {
   .navmenu li {
     position: relative;
   }
-
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
@@ -355,7 +355,7 @@ h6 {
   .navmenu .megamenu ul li:hover>a {
     padding: 10px 20px;
     font-size: 15px;
-    color: var(--nav-dropdown-color);
+
   }
 
   .navmenu .megamenu ul li a:hover,
@@ -848,14 +848,33 @@ section,
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  min-height: 80vh;
+  min-height: 110vh;
   position: relative;
   padding: 120px 0 60px 0;
   display: flex;
   align-items: center;
+  background-image: url("../img/depankost.jpg");
+  background-size: cover; 
+  height: auto;
+}
+.hero::before {
+  content: ''; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit; /* Mengambil background-image dari .hero */
+  filter: brightness(50%); /* Filter gelap diterapkan di sini */
+  z-index: 0; 
 }
 
+.hero h1, .hero p, .hero .btn-get-started {
+  position: relative;
+  z-index: 2; /* Konten lainnya tetap berada di atas overlay */
+}
 .hero h1 {
+  color: var(--nav-dropdown-background-color);
   margin: 0;
   font-size: 48px;
   font-weight: 700;
