@@ -79,12 +79,17 @@
     }
   }
   scrollTop.addEventListener('click', (e) => {
+    // Jangan lakukan apa-apa jika tombol digunakan untuk WhatsApp
+    if (scrollTop.href.startsWith('https://wa.me')) {
+      return;
+    }
     e.preventDefault();
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   });
+  
 
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
@@ -227,4 +232,6 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  
 })();
+
