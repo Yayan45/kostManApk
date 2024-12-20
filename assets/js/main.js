@@ -73,22 +73,25 @@
    */
   let scrollTop = document.querySelector('.scroll-top');
 
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
-    }
+function toggleScrollTop() {
+  if (scrollTop) {
+    window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
   }
-  scrollTop.addEventListener('click', (e) => {
-    // Jangan lakukan apa-apa jika tombol digunakan untuk WhatsApp
-    if (scrollTop.href.startsWith('https://wa.me')) {
-      return;
-    }
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+}
+
+scrollTop.addEventListener('click', (e) => {
+  // Jika tombol digunakan untuk WhatsApp, biarkan link bekerja
+  if (scrollTop.href.startsWith('http://wa.me/+6287877119922')) {
+    return; // Jangan melakukan preventDefault jika link ke WhatsApp
+  }
+  
+  e.preventDefault(); // Mencegah scroll ketika tidak mengarah ke WhatsApp
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
   });
+});
+
   
 
   window.addEventListener('load', toggleScrollTop);

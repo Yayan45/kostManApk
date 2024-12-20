@@ -5,12 +5,10 @@ ob_start();
 session_start();
 
 if (!isset($_SESSION['akun_id'])) {
-  header("location: ../../landing-page.php");
+  header("location: ../../../../index.html");
 } elseif (isset($_SESSION['akun_id'])) {
   if ($_SESSION['hak_akses'] == 2) {
     header("location: ../penghuni/penghuni-dashboard.php");
-  } elseif ($_SESSION['hak_akses'] == 3) {
-    header("location: ../calon-penghuni/calon-dashboard.php");
   }
 }
 
@@ -50,6 +48,8 @@ if (!isset($_SESSION['akun_id'])) {
 </head>
 
 <body id="page-top">
+
+
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -285,7 +285,7 @@ if (!isset($_SESSION['akun_id'])) {
                   <thead>
                     <tr>
                       <th>No.</th>
-                      <th class="d-none">id pembayaran</th>
+                      <th class="d-none">ID Pembayaran</th>
                       <th>Kamar</th>
                       <th>Penghuni</th>
                       <th>Tanggal Pembayaran</th>
@@ -297,7 +297,7 @@ if (!isset($_SESSION['akun_id'])) {
                   <tfoot>
                     <tr>
                       <th>No.</th>
-                      <th class="d-none">id pembayaran</th>
+                      <th class="d-none">ID Pembayaran</th>
                       <th>Kamar</th>
                       <th>Penghuni</th>
                       <th>Tanggal Pembayaran</th>
@@ -308,47 +308,56 @@ if (!isset($_SESSION['akun_id'])) {
                   </tfoot>
                   <tbody>
                     <?php
-                    $query = "SELECT pembayaran.id_pembayaran, kamar.nomor_kamar, pengguna.nama_pengguna, pembayaran.tanggal_pembayaran, pembayaran.nilai_pembayaran, pembayaran.keterangan, jenis_status_pembayaran.nama_status_pembayaran
-                    FROM pembayaran, kamar, pengguna, menghuni, jenis_status_pembayaran
-                      WHERE
-                        pembayaran.id_menghuni = menghuni.id_menghuni AND
-                          menghuni.id_kamar = kamar.id_kamar AND
-                          menghuni.id_pengguna = pengguna.id_pengguna AND
-                          pembayaran.id_status = jenis_status_pembayaran.id_status
-                          
-                          ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
+                    $query = "SELECT pembayaran.id_pembayaran, kamar.nomor_kamar, pengguna.nama_pengguna, 
+pembayaran.tanggal_pembayaran, pembayaran.nilai_pembayaran, pengguna.telepon_pengguna, 
+pembayaran.keterangan, jenis_status_pembayaran.nama_status_pembayaran
+FROM pembayaran
+JOIN menghuni ON pembayaran.id_menghuni = menghuni.id_menghuni
+JOIN kamar ON menghuni.id_kamar = kamar.id_kamar
+JOIN pengguna ON menghuni.id_pengguna = pengguna.id_pengguna
+JOIN jenis_status_pembayaran ON pembayaran.id_status = jenis_status_pembayaran.id_status
+ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
+
 
                     $hasil = mysqli_query($conn, $query);
                     $no = 1;
 
                     while ($dataPembayaran = mysqli_fetch_array($hasil)) {
+                      $id_pembayaran = $dataPembayaran['id_pembayaran'];
+                      $nomor_kamar = $dataPembayaran['nomor_kamar'];
+                      $nama_pengguna = $dataPembayaran['nama_pengguna'];
+                      $tanggal_pembayaran = $dataPembayaran['tanggal_pembayaran'];
+                      $nilai_pembayaran = $dataPembayaran['nilai_pembayaran'];
+                      $status_pembayaran = strtoupper($dataPembayaran['nama_status_pembayaran']);
+                      $nomor_telepon = $dataPembayaran['telepon_pengguna'];
 
+                      $url = "https://api.whatsapp.com/send?phone=$nomor_telepon&text=Halo!%20$nama_pengguna%20%F0%9F%98%8A%0ATerima%20kasih%20telah%20melakukan%20pembayaran%20kost.%20Berikut%20adalah%20rincian%20pembayaran%20Anda%3A%0A%0ANomor%20Kamar%3A%20$nomor_kamar%0ATanggal%3A%20$tanggal_pembayaran%0ABulan%3A%20" . date('F', strtotime($tanggal_pembayaran)) . "%0AJumlah%3A%20Rp" . number_format($nilai_pembayaran, 0, ',', '.') . "%0ATerima%20kasih%20telah%20mempercayakan%20kami%20untuk%20kebutuhan%20kost%20Anda.%0AJika%20Anda%20memiliki%20pertanyaan%20lebih%20lanjut%2C%20jangan%20ragu%20untuk%20menghubungi%20kami!";
                     ?>
                       <tr>
                         <td><?php echo $no; ?></td>
-                        <td class="d-none"><?php echo $dataPembayaran['id_pembayaran']; ?></td>
-                        <td><?php echo 'No. ' . $dataPembayaran['nomor_kamar']; ?></td>
-                        <td><?php echo $dataPembayaran['nama_pengguna']; ?></td>
-                        <td><?php echo $dataPembayaran['tanggal_pembayaran']; ?></td>
-                        <td><?php echo 'Rp. ' . number_format($dataPembayaran['nilai_pembayaran']); ?></td>
-                        <td><?php echo strtoupper($dataPembayaran['nama_status_pembayaran']); ?></td>
+                        <td class="d-none"><?php echo $id_pembayaran; ?></td>
+                        <td><?php echo 'No. ' . $nomor_kamar; ?></td>
+                        <td><?php echo $nama_pengguna; ?></td>
+                        <td><?php echo $tanggal_pembayaran; ?></td>
+                        <td><?php echo 'Rp. ' . number_format($nilai_pembayaran); ?></td>
+                        <td><?php echo $status_pembayaran; ?></td>
                         <td>
-                          <!-- view btn -->
-                          <button name="view" type="button" value="view"
-                            id="<?php echo $dataPembayaran['id_pembayaran']; ?>"
-                            class="btn btn-primary btn-circle btn-sm view_data m-1" title="Lihat Detail">
+                          <button name="view" type="button" value="view" id="<?php echo $id_pembayaran; ?>"
+                            class="btn btn-secondary btn-circle btn-sm view_data m-1" title="Lihat Detail">
                             <i class="fas fa-eye"></i>
                           </button>
-                          <!-- edit btn -->
-                          <button type="button" class="btn btn-success btn-circle btn-sm m-1 edit_data"
+                          <button type="button" class="btn btn-primary btn-circle btn-sm m-1 edit_data"
                             title="Edit Data Pembayaran" name="edit" value="edit" id="edit">
                             <i class="fas fa-pen"></i>
                           </button>
-                          <!-- delete btn -->
-                          <a href="../../actions/process-delete.php?id_hapus_pembayaran=<?php echo $dataPembayaran['id_pembayaran']; ?>"
+                          <a href="../../actions/process-delete.php?id_hapus_pembayaran=<?php echo $id_pembayaran; ?>"
                             class="btn btn-danger btn-circle btn-sm m-1" title="Hapus Data Kamar"
                             onclick="return confirm('Anda yakin ingin menghapus data ini? Data yang dihapus tidak dapat dikembalikan!');">
                             <i class="fas fa-trash"></i>
+                          </a>
+                          <a href="<?php echo $url; ?>" target="_blank" id="kirim-whatsapp-<?php echo $id_pembayaran; ?>"
+                            class="btn btn-success btn-circle btn-sm m-1" title="Kirim chat konfirmasi pembayaran">
+                            <i class="fab fa-whatsapp"></i>
                           </a>
                         </td>
                       </tr>
@@ -362,246 +371,244 @@ if (!isset($_SESSION['akun_id'])) {
             </div>
           </div>
 
+          <!-- End of Main Content -->
+
+          <!-- Footer -->
+          <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+              <div class="copyright text-center my-auto">
+                <span>Copyright &copy; TechSolutions-2024</span>
+              </div>
+            </div>
+          </footer>
+          <!-- End of Footer -->
 
         </div>
-        <!-- End of Main Content -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; TechSolutions-2024</span>
+      </div>
+      <!-- End of Page Wrapper -->
+
+      <!-- Scroll to Top Button-->
+      <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+      </a>
+
+      <!-- Logout Modal-->
+      <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ingin Keluar Aplikasi?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">Pilih "Logout" dibawah jika anda ingin mengakhiri sesi.</div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="../../actions/process-logout.php">Logout</a>
             </div>
           </div>
-        </footer>
-        <!-- End of Footer -->
-
-      </div>
-      <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ingin Keluar Aplikasi?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Pilih "Logout" dibawah jika anda ingin mengakhiri sesi.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="../../actions/process-logout.php">Logout</a>
-          </div>
         </div>
       </div>
-    </div>
 
-    <!-- view modal -->
-    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Rincian Pemasukan</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="detail_pembayaran">
+      <!-- view modal -->
+      <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Rincian Pemasukan</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="detail_pembayaran">
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- update Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Edit Data Pemasukan</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="detail_edit">
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal tambah -->
-    <div class="modal fade" id="tambah-pengeluaran" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Tambah Pembayaran</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="../../actions/process-insert.php" method="POST" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="menghuni">Data Menghuni</label>
-                <select name="menghuni" class="form-control" id="menghuni" required>
-                  <option selected disabled value="">Pilih Data Menghuni</option>
-
-                  <?php
-                  $query = "SELECT * FROM menghuni, kamar, pengguna WHERE menghuni.id_kamar = kamar.id_kamar AND menghuni.id_pengguna = pengguna.id_pengguna";
-
-                  $result = mysqli_query($conn, $query);
-
-                  while ($dataMenghuni = mysqli_fetch_array($result)) {
-                  ?>
-
-                    <option value="<?php echo $dataMenghuni['id_menghuni']; ?>">
-                      <?php echo 'Kamar no. ' . $dataMenghuni['nomor_kamar'] . ' [' . $dataMenghuni['nama_pengguna'] . ']'; ?></option>
-
-                  <?php
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="tanggal">Tanggal Pembayaran</label>
-                <input value="" type="date" class="form-control" id="tanggal" name="tanggal" aria-describedby="tanggal"
-                  placeholder="Masukkan tanggal pengeluaran" required>
-              </div>
-              <div class="form-group">
-                <label for="nominal">Nominal Pembayaran</label>
-                <input value="" type="number" class="form-control" id="nominal" name="nominal"
-                  aria-describedby="nominal" placeholder="Masukkan nominal pembayaran" required>
-              </div>
-              <div class="form-group">
-                <label for="keterangan">Keterangan</label>
-                <textarea value="" type="text" class="form-control" id="keterangan" name="keterangan"
-                  aria-describedby="keterangan" rows="3" placeholder="Masukkan keterangan pengeluaran"
-                  required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="status">Status Konfirmasi Pembayaran</label>
-                <select name="status" class="form-control" id="status" required>
-                  <option selected disabled value="">Pilih Status Konfirmasi</option>
-
-                  <?php
-                  $query = "SELECT * FROM jenis_status_pembayaran";
-
-                  $result = mysqli_query($conn, $query);
-
-                  while ($dataStatus = mysqli_fetch_array($result)) {
-                  ?>
-
-                    <option value="<?php echo $dataStatus['id_status']; ?>">
-                      <?php echo strtoupper($dataStatus['nama_status_pembayaran']); ?></option>
-
-                  <?php
-                  }
-                  ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="profil">Bukti Pembayaran</label>
-                <input value="" type="file" class="form-control-file" id="profil" name="profil"
-                  aria-describedby="profil" accept="image/*" required>
-              </div>
-              <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                <button type="submit" name="submitPembayaran" class="btn btn-primary"
-                  onclick="return confirm('Anda yakin ingin menambah data?');">Submit</button>
-              </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Bootstrap core JavaScript-->
-      <script src="../../vendor/jquery/jquery.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- update Modal -->
+      <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Edit Data Pemasukan</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="detail_edit">
 
-      <!-- Core plugin JavaScript-->
-      <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <!-- lightbox -->
-      <script src="../../js/lightbox.js"></script>
+      <!-- Modal tambah -->
+      <div class="modal fade" id="tambah-pengeluaran" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Tambah Pembayaran</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="../../actions/process-insert.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="menghuni">Data Menghuni</label>
+                  <select name="menghuni" class="form-control" id="menghuni" required>
+                    <option selected disabled value="">Pilih Data Menghuni</option>
 
-      <!-- Custom scripts for all pages-->
-      <script src="../../js/sb-admin-2.min.js"></script>
+                    <?php
+                    $query = "SELECT * FROM menghuni, kamar, pengguna WHERE menghuni.id_kamar = kamar.id_kamar AND menghuni.id_pengguna = pengguna.id_pengguna";
 
-      <!-- Page level plugins -->
-      <script src="../../vendor/chart.js/Chart.min.js"></script>
+                    $result = mysqli_query($conn, $query);
 
-      <!-- Page level plugins -->
-      <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
-      <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+                    while ($dataMenghuni = mysqli_fetch_array($result)) {
+                    ?>
 
-      <!-- Page level custom scripts -->
-      <script src="../../js/demo/datatables-demo.js"></script>
+                      <option value="<?php echo $dataMenghuni['id_menghuni']; ?>">
+                        <?php echo 'Kamar no. ' . $dataMenghuni['nomor_kamar'] . ' [' . $dataMenghuni['nama_pengguna'] . ']'; ?></option>
 
-      <script>
-        $(document).ready(function() {
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="tanggal">Tanggal Pembayaran</label>
+                  <input value="" type="date" class="form-control" id="tanggal" name="tanggal" aria-describedby="tanggal"
+                    placeholder="Masukkan tanggal pengeluaran" required>
+                </div>
+                <div class="form-group">
+                  <label for="nominal">Nominal Pembayaran</label>
+                  <input value="" type="number" class="form-control" id="nominal" name="nominal"
+                    aria-describedby="nominal" placeholder="Masukkan nominal pembayaran" required>
+                </div>
+                <div class="form-group">
+                  <label for="keterangan">Keterangan</label>
+                  <textarea value="" type="text" class="form-control" id="keterangan" name="keterangan"
+                    aria-describedby="keterangan" rows="3" placeholder="Masukkan keterangan pengeluaran"
+                    required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status Konfirmasi Pembayaran</label>
+                  <select name="status" class="form-control" id="status" required>
+                    <option selected disabled value="">Pilih Status Konfirmasi</option>
 
-          // untuk view data
-          $('#dataTable').on('click', '.view_data', function() {
-            var id_pembayaran = $(this).attr('id');
-            console.log(id_pembayaran);
+                    <?php
+                    $query = "SELECT * FROM jenis_status_pembayaran";
 
-            $.ajax({
-              url: "ajax/select_data_pemasukan.php",
-              method: "post",
-              data: {
-                id_pembayaran: id_pembayaran
-              },
-              success: function(data) {
-                $('#detail_pembayaran').html(data);
-                $('#viewModal').modal();
-              }
+                    $result = mysqli_query($conn, $query);
+
+                    while ($dataStatus = mysqli_fetch_array($result)) {
+                    ?>
+
+                      <option value="<?php echo $dataStatus['id_status']; ?>">
+                        <?php echo strtoupper($dataStatus['nama_status_pembayaran']); ?></option>
+
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="profil">Bukti Pembayaran</label>
+                  <input value="" type="file" class="form-control-file" id="profil" name="profil"
+                    aria-describedby="profil" accept="image/*" required>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                  <button type="submit" name="submitPembayaran" class="btn btn-primary"
+                    onclick="return confirm('Anda yakin ingin menambah data?');">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- lightbox -->
+        <script src="../../js/lightbox.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="../../js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="../../vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="../../js/demo/datatables-demo.js"></script>
+
+        <script>
+          $(document).ready(function() {
+
+            // untuk view data
+            $('#dataTable').on('click', '.view_data', function() {
+              var id_pembayaran = $(this).attr('id');
+              console.log(id_pembayaran);
+
+              $.ajax({
+                url: "ajax/select_data_pemasukan.php",
+                method: "post",
+                data: {
+                  id_pembayaran: id_pembayaran
+                },
+                success: function(data) {
+                  $('#detail_pembayaran').html(data);
+                  $('#viewModal').modal();
+                }
+              });
+            });
+
+            // edit data
+            $('#dataTable').on('click', '.edit_data', function() {
+              var $tr = $(this).closest('tr');
+
+              var data = $tr.children("td").map(function() {
+                return $(this).text();
+              }).get();
+
+              var id_pembayaran = data[1];
+              console.log(id_pembayaran);
+
+              $.ajax({
+                url: "ajax/edit_data_pembayaran.php",
+                method: "post",
+                data: {
+                  id_pembayaran: id_pembayaran
+                },
+                success: function(data) {
+                  $('#detail_edit').html(data);
+                  $('#updateModal').modal();
+                }
+              });
             });
           });
-
-          // edit data
-          $('#dataTable').on('click', '.edit_data', function() {
-            var $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-              return $(this).text();
-            }).get();
-
-            var id_pembayaran = data[1];
-            console.log(id_pembayaran);
-
-            $.ajax({
-              url: "ajax/edit_data_pembayaran.php",
-              method: "post",
-              data: {
-                id_pembayaran: id_pembayaran
-              },
-              success: function(data) {
-                $('#detail_edit').html(data);
-                $('#updateModal').modal();
-              }
-            });
-          });
-        });
-      </script>
+        </script>
 
 </body>
 
