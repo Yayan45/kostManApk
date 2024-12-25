@@ -5,7 +5,7 @@ if (isset($_POST['submit_daftar'])) {
   $nama_lengkap = mysqli_real_escape_string($conn, $_POST['nama_lengkap_reg']);
   $alamat = mysqli_real_escape_string($conn, $_POST['alamat_reg']);
   $provinsi = mysqli_real_escape_string($conn, $_POST['provinsi_reg']);
-  $kota = mysqli_real_escape_string($conn, $_POST['kota_reg']);
+  $kontak_darurat = mysqli_real_escape_string($conn, $_POST['kontak_darurat_reg']);
   $nomor = mysqli_real_escape_string($conn, $_POST['nomor_reg']);
   $email = mysqli_real_escape_string($conn, $_POST['email_reg']);
   $gender = mysqli_real_escape_string($conn, $_POST['gender_reg']);
@@ -16,13 +16,13 @@ if (isset($_POST['submit_daftar'])) {
   $akses = mysqli_real_escape_string($conn, $_POST['id-akses_req']);
   $foto_reg = mysqli_real_escape_string($conn, $_POST['foto_reg']);
 
-  // Query perbaikan
+  // Pastikan kolom 'id_pengguna' adalah AUTO_INCREMENT dan dibiarkan kosong
   $query = "INSERT INTO pengguna (
-      nama_pengguna, alamat_pengguna, provinsi_pengguna, kota_pengguna, telepon_pengguna, 
+      nama_pengguna, alamat_pengguna, provinsi_pengguna, kontak_darurat, telepon_pengguna, 
       email_pengguna, kelamin_pengguna, tanggal_lahir_pengguna, no_ktp_pengguna, 
       foto_pengguna, password, id_akses
     ) VALUES (
-      '$nama_lengkap', '$alamat', '$provinsi', '$kota', '$nomor', 
+      '$nama_lengkap', '$alamat', '$provinsi', '$kontak_darurat', '$nomor', 
       '$email', '$gender', '$tanggal_lahir', '$nomor_ktp', 
       '$foto_reg', '$password_hash', '$akses'
     )";

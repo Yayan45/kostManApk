@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Des 2024 pada 17.05
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Dec 25, 2024 at 10:04 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `hak_akses`
+-- Table structure for table `hak_akses`
 --
 
 CREATE TABLE `hak_akses` (
@@ -33,19 +33,18 @@ CREATE TABLE `hak_akses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `hak_akses`
+-- Dumping data for table `hak_akses`
 --
 
 INSERT INTO `hak_akses` (`id_akses`, `nama_akses`) VALUES
 (1, 'Admin'),
 (2, 'Penghuni'),
-(3, 'Calon Penghuni'),
-(4, 'nonaktif');
+(3, 'nonaktif');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `info_kost`
+-- Table structure for table `info_kost`
 --
 
 CREATE TABLE `info_kost` (
@@ -64,16 +63,16 @@ CREATE TABLE `info_kost` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `info_kost`
+-- Dumping data for table `info_kost`
 --
 
 INSERT INTO `info_kost` (`id_kost`, `id_pengguna`, `jenis_kost`, `nama_kost`, `alamat_kost`, `provinsi_kost`, `kota_kost`, `no_kost`, `email_kost`, `logo_kost`, `foto_kost`, `deskripsi_kost`) VALUES
-(1, 25, 'Kost Putri', 'Kost Bapak Rudi', 'Jl. Bima II No.30 Pendrikan Kidul', 'Jawa tengah', 'Semarang', '087877119922', '-@gmail.com', '', '6747ca0b03dd1.png', 'Kost Putra yang nyaman, aman, bersih, dan modern. Memiliki 2 lantai, dan 13 kamar. Fasilitas oke harga bersahabat. Terletak di daerah yang strategis dan dekat dengan kampus Universitas Dian Nuswantoro. Cocok untuk para mahasiswa');
+(1, 25, 'Kost Putri', 'Kost Bapak Rudi', 'Jl. Bima II No.30 Pendrikan Kidul', 'Jawa tengah', 'Semarang', '6287877119922', '-@gmail.com', '', '676bbe0a153bf.jpg', 'Kost Putra yang nyaman, aman, bersih, dan modern. Memiliki 2 lantai, dan 13 kamar. Fasilitas oke harga bersahabat. Terletak di daerah yang strategis dan dekat dengan kampus Universitas Dian Nuswantoro. Cocok untuk para mahasiswa');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_pengeluaran`
+-- Table structure for table `jenis_pengeluaran`
 --
 
 CREATE TABLE `jenis_pengeluaran` (
@@ -84,7 +83,7 @@ CREATE TABLE `jenis_pengeluaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `jenis_pengeluaran`
+-- Dumping data for table `jenis_pengeluaran`
 --
 
 INSERT INTO `jenis_pengeluaran` (`id_jenis_pengeluaran`, `kode_pengeluaran`, `kategori_pengeluaran`, `nama_pengeluaran`) VALUES
@@ -96,7 +95,7 @@ INSERT INTO `jenis_pengeluaran` (`id_jenis_pengeluaran`, `kode_pengeluaran`, `ka
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_status_pembayaran`
+-- Table structure for table `jenis_status_pembayaran`
 --
 
 CREATE TABLE `jenis_status_pembayaran` (
@@ -105,7 +104,7 @@ CREATE TABLE `jenis_status_pembayaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `jenis_status_pembayaran`
+-- Dumping data for table `jenis_status_pembayaran`
 --
 
 INSERT INTO `jenis_status_pembayaran` (`id_status`, `nama_status_pembayaran`) VALUES
@@ -115,7 +114,7 @@ INSERT INTO `jenis_status_pembayaran` (`id_status`, `nama_status_pembayaran`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kamar`
+-- Table structure for table `kamar`
 --
 
 CREATE TABLE `kamar` (
@@ -125,31 +124,29 @@ CREATE TABLE `kamar` (
   `lantai_kamar` enum('1','2','3','4','5','6','7','8') NOT NULL,
   `kapasitas_kamar` int(11) NOT NULL,
   `deskripsi_kamar` varchar(255) NOT NULL,
-  `harga_harian` double NOT NULL,
-  `harga_mingguan` double NOT NULL,
   `harga_bulanan` double NOT NULL,
-  `harga_tahunan` double NOT NULL,
   `denda` double NOT NULL,
   `foto_kamar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `kamar`
+-- Dumping data for table `kamar`
 --
 
-INSERT INTO `kamar` (`id_kamar`, `nomor_kamar`, `luas_kamar`, `lantai_kamar`, `kapasitas_kamar`, `deskripsi_kamar`, `harga_harian`, `harga_mingguan`, `harga_bulanan`, `harga_tahunan`, `denda`, `foto_kamar`) VALUES
-(4, 2, '4x4', '1', 1, 'Kamar nomor satu', 10000, 70000, 300000, 1200000, 5000, '674ab2e04279e.jpg'),
-(5, 3, '4x4', '1', 1, 'Kamar nomor satu', 10000, 65000, 300000, 330000, 5000, '5e166d28510e6.jpg'),
-(6, 4, '4x4', '1', 1, 'Kamar Mandi Dalam, Satu tempat tidur, satu lemari, satu meja, 2 kursi', 10000, 65000, 300000, 330000, 5000, '5e166d36598d9.jpg'),
-(7, 5, '4x4', '1', 1, 'Kamar nomor satu', 10000, 65000, 300000, 330000, 5000, '674abe700d0f5.jpg'),
-(8, 6, '4x4', '1', 1, 'asdasdasdasdsad', 0, 0, 300000, 0, 5000, '5e192d0d9e4d6.jpg'),
-(9, 7, '4x4', '1', 1, 'asdadasdadasadds', 0, 0, 400000, 0, 5000, '674ac0252d663.jpg'),
-(10, 1, '4X4', '1', 1, 'fasilitas kursi meja lemari yahh', 0, 0, 500000, 0, 500, '674980cc0ad62.jpg');
+INSERT INTO `kamar` (`id_kamar`, `nomor_kamar`, `luas_kamar`, `lantai_kamar`, `kapasitas_kamar`, `deskripsi_kamar`, `harga_bulanan`, `denda`, `foto_kamar`) VALUES
+(4, 2, '4x4', '1', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 725000, 1000, '676bc8392d355.jpg'),
+(5, 3, '4x4', '1', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 825000, 1000, '676bc844ca336.jpg'),
+(6, 4, '4x4', '1', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 725000, 1000, '676bc85051ad7.jpg'),
+(7, 5, '4x4', '2', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 525000, 1000, '676bc8613494e.jpg'),
+(8, 6, '4x4', '2', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 825000, 1000, '676bc86ac7f62.jpg'),
+(9, 7, '4x4', '2', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 725000, 5000, '676bc8762965a.jpg'),
+(10, 1, '4X4', '1', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 825000, 1000, '676bc823cce97.jpg'),
+(11, 8, '4x4', '2', 1, 'Fasitilas kamar meja,kursi kasur busa,sprei kasur,sarung bantal,lemari pakaian, WIFI,Iistrik gratis, kamar mandi luar, tidak banjir, kamar bersih dan nyaman.', 725000, 1000, '676bc889bced1.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menghuni`
+-- Table structure for table `menghuni`
 --
 
 CREATE TABLE `menghuni` (
@@ -161,20 +158,23 @@ CREATE TABLE `menghuni` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `menghuni`
+-- Dumping data for table `menghuni`
 --
 
 INSERT INTO `menghuni` (`id_menghuni`, `id_kamar`, `id_pengguna`, `tanggal_masuk`, `tanggal_keluar`) VALUES
-(8, 4, 15, '2019-12-21', '0000-00-00'),
-(15, 8, 23, '2020-01-12', '0000-00-00'),
-(18, 6, 17, '2024-11-24', '0000-00-00'),
-(19, 7, 30, '2024-12-05', '0000-00-00'),
-(20, 9, 41, '2024-11-26', '0000-00-00');
+(19, 7, 30, '2024-11-10', '0000-00-00'),
+(20, 9, 41, '2024-11-26', '0000-00-00'),
+(21, 5, 2, '2024-12-25', '0000-00-00'),
+(22, 10, 42, '2024-12-25', '0000-00-00'),
+(23, 11, 43, '2004-06-25', '0000-00-00'),
+(24, 6, 44, '2024-11-25', '0000-00-00'),
+(25, 4, 45, '2024-11-25', '0000-00-00'),
+(26, 8, 46, '2024-11-25', '0000-00-00');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembayaran`
+-- Table structure for table `pembayaran`
 --
 
 CREATE TABLE `pembayaran` (
@@ -188,24 +188,25 @@ CREATE TABLE `pembayaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `pembayaran`
+-- Dumping data for table `pembayaran`
 --
 
 INSERT INTO `pembayaran` (`id_pembayaran`, `id_menghuni`, `tanggal_pembayaran`, `nilai_pembayaran`, `bukti_pembayaran`, `keterangan`, `id_status`) VALUES
-(13, 8, '2019-11-13', 400000, '', 'jjsiiqjjqwkewq', 1),
-(17, 8, '2020-01-01', 600000, '5e18691e0128e.jpg', 'baru bayar tahun baruan', 1),
-(19, 8, '2020-01-04', 500000, '5e1853b0c7fc1.jpg', 'Bayar euy', 1),
-(20, 8, '2020-01-10', 400000, '5e1853da38082.jpg', 'bayar Lagi skuy', 1),
-(28, 15, '2020-01-12', 330000, '5e1a8fa039c64.jpg', 'Pembayaran Booking kamar no.6 tanggal: 2020-01-12', 1),
-(30, 8, '2024-11-16', 900000, '674c8c4f8894f.jpg', 'tidak ada', 1),
-(33, 19, '2024-11-24', 300000, '674abed6b00ae.jpg', 'Pembayaran Booking kamar no.5 tanggal: 2024-11-24', 1),
-(34, 20, '2024-11-26', 750000, '674ac2d336ba9.jpg', 'hahayhayahaya', 1),
-(38, 19, '2024-12-06', 300000, '675312b8df6c4.jpg', 'BAYAR KOST 10 DECEMBER', 1);
+(33, 19, '2024-11-20', 912000, '674abed6b00ae.jpg', 'Pembayaran Booking kamar no.5 tanggal: 2024-11-24', 1),
+(34, 20, '2024-12-26', 725000, '674ac2d336ba9.jpg', 'hahayhayahaya', 1),
+(38, 19, '2024-11-10', 300000, '675312b8df6c4.jpg', 'BAYAR KOST 10 DECEMBER', 1),
+(40, 21, '2024-12-25', 725000, '676bba5860952.jpg', 'lunas', 1),
+(41, 22, '2024-12-25', 725000, '676bbcfc730d6.jpg', 'lunas', 1),
+(42, 23, '2004-06-25', 725000, '676bbda3cedcd.jpg', 'lunas', 1),
+(43, 24, '2024-11-25', 725000, '676bc09c45fd5.jpg', 'lunas', 1),
+(44, 25, '2024-11-25', 725000, '676bc1187e809.jpg', 'lunas', 1),
+(45, 26, '2024-11-25', 725000, '676bc303e4c31.jpg', 'lunas', 1),
+(46, 26, '2024-12-25', 740000, '676bc36f2108b.jpg', 'pembayaran kost bulan desember', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengeluaran`
+-- Table structure for table `pengeluaran`
 --
 
 CREATE TABLE `pengeluaran` (
@@ -219,7 +220,7 @@ CREATE TABLE `pengeluaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `pengeluaran`
+-- Dumping data for table `pengeluaran`
 --
 
 INSERT INTO `pengeluaran` (`id_pengeluaran`, `id_jenis_pengeluaran`, `tanggal_pengeluaran`, `nilai_pengeluaran`, `keterangan`, `bukti_pengeluaran`, `id_pengguna`) VALUES
@@ -228,7 +229,7 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `id_jenis_pengeluaran`, `tanggal_pe
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengguna`
+-- Table structure for table `pengguna`
 --
 
 CREATE TABLE `pengguna` (
@@ -248,61 +249,57 @@ CREATE TABLE `pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data untuk tabel `pengguna`
+-- Dumping data for table `pengguna`
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `nama_pengguna`, `alamat_pengguna`, `provinsi_pengguna`, `kontak_darurat`, `telepon_pengguna`, `email_pengguna`, `kelamin_pengguna`, `tanggal_lahir_pengguna`, `no_ktp_pengguna`, `password`, `id_akses`, `foto_pengguna`) VALUES
-(14, 'Mamank Garox', 'Jl Jalan skuy', 'Jawa TImur', 'Jember', '08123456789', 'epriot23@gmail.com', 'Wanita', '2019-12-21', '2991001876178721', '1234', 3, '5e15a93bb371b.jpg'),
-(15, 'RIcardo Milos', 'Jl Banjarsengon', 'Jawa Timur', '097812791293812  (Ibu)', '08322144718', 'royhanalghazy@gmail.com', 'Pria', '1999-04-08', '299100188123', 'aku_ganteng', 2, '6747d3c33867e.jpg'),
-(17, 'Alip', 'Jl. Diponegoro VII 73', 'Jawa Timur', '08213292132 (kakak)', '085735678159', 'alip@gmail.com', 'Pria', '2020-01-15', '3509191412990213213', '123\r\n', 2, '674857ccb3470.jpeg'),
-(19, 'Siti Maemunah', '', '', '', '0856722458819', 'sitimaemun@gmail.com', 'Pria', '0000-00-00', '', '$2y$10$RsLYh4vjOYpjLZFJ1RWm..F793eN9kwbl/XNDJdTIqEFce8USNoQe', 3, ''),
-(21, 'asdas', NULL, NULL, NULL, '12321321', 'admin@indiekost.com', NULL, NULL, NULL, '123', 3, NULL),
-(22, 'siti', 'Jl Jakarta Raya 88', 'Jawa Timur', 'Jember', '085735678159', 'siti@gmail.com', 'Wanita', '2020-01-10', '12312321312', '$2y$10$uqtbquIB9pedSERlVwcbI.23OuDI8h9t4R6s1.NsiiGS3MXNGqMAq', 3, '5e19cf3d77a31.jpg'),
-(23, 'Meisa', 'Jl. Patimura No. 89', 'Jawa Timur', '0872121929234 (Paman)', '12392388213', 'meisa@gmail.com', 'Wanita', '2020-01-12', '3509191412990007', '$2y$10$ZmlZ/KokAtfu2SYTxJRAzOLuxbjVMaeu3495sHZHyCJ.jcXt23G9C', 2, '67485bb0d68e9.jpeg'),
-(25, 'Rudi Indro Yuwono', 'desa kalirandu', 'jawa tengah', '0823122312312(Ayah)', '088888888888', 'hahay@gmail.com', 'Pria', '2024-11-15', '2133133333333333333121', '$2y$10$upyoFeF1r5fyG23d8BY31eFvpPAIVRsm8uFw2dY.aHhD0FvXsgsmC', 1, '6747cd61f0d9c.png'),
-(26, 'yayan', NULL, NULL, NULL, '241231231', 'yayan@gmail.com', NULL, '0000-00-00', NULL, '123', 3, NULL),
-(27, 'wahyu', 'bogor', 'jawa tengah', 'semarangh', '088888888888', 'wahyu@gmail.com', 'Pria', '2024-11-16', '2133133333333333333121', '$2y$10$Ute1oYW3.sCJ8k4ZC/2CuuqA3RDqp5Fs9BRW9s6v6q8.mxkbwqzQ2', 2, '674858693013d.jpg'),
-(29, 'udin', 'semarang', 'jawa tengah', 'semarang kota', '089123123321', 'yayanrifan45@gmail.com', 'Pria', '2024-11-13', '009920238238021788', 'yayan123', 3, NULL),
-(30, 'wahyu ', '23423', '32423', '3424981283 (Ibu)', '088888888888', 'wahyudwi@gmail.com', 'Pria', '2024-11-14', '234234234', '$2y$10$T1AFhBQqTAMQaj7PFXsmUeh5tgveJHj2bmP5wDbFqAtiVTds9F42.', 2, '67485813ccbad.jpeg'),
-(41, 'hadi pu', 'batang kota asik', 'Jawa Tengah', '09787182782 (Ayah)', '0999932323', 'hpu@gmail.com', 'Pria', '2024-11-05', '12121212121', '$2y$10$22rxxyKMgwoGfz1nT6gKIek06DCTEV8O1hj8F5.cjf996b7.p3SMK', 2, '674858508e474.jpeg');
+(2, 'Farras', 'Sumatra', 'Sumatra', '', '62895321233687', 'farras@gmail.com', 'Pria', '2004-07-25', '12836172853621536721312', '$2y$10$BYpmJIUVGimFYLYpFjgIZOWp6PFb51dWH8Di4b2y2pygVJHa4NQ/u', 2, 'none.png'),
+(25, 'Rudi Indro Yuwono', 'desa kalirandu', 'jawa tengah', '0823122312312(Ayah)', '088888888888', 'yuwono@gmail.com', 'Pria', '2024-11-15', '2133133333333333333121', '$2y$10$upyoFeF1r5fyG23d8BY31eFvpPAIVRsm8uFw2dY.aHhD0FvXsgsmC', 1, '676bbe56f187f.png'),
+(30, 'Bryan', 'Demak', 'Jawa Tengah', '3424981283 (Ibu)', '6282220078449', 'bryan@gmail.com', 'Pria', '2005-01-13', '234234234', '$2y$10$T1AFhBQqTAMQaj7PFXsmUeh5tgveJHj2bmP5wDbFqAtiVTds9F42.', 2, '676bbf9028693.png'),
+(41, 'Nicho', 'Tegal', 'Jawa Tengah', '09787182782 (Ayah)', '6287806858597', 'nicho@gmail.com', 'Pria', '2005-06-25', '12121212121', '$2y$10$22rxxyKMgwoGfz1nT6gKIek06DCTEV8O1hj8F5.cjf996b7.p3SMK', 2, '676bbf71d74bd.png'),
+(42, 'Rafif', 'Pemalang', 'Jawa Tengah', '62821482648124', '6287730420028', 'rafif@gmail.com', 'Pria', '2004-06-25', '3254235234234234', '$2y$10$rk0WD3hu6Fpn3QBrnphphOYacy5pODflh3trnItBmjAcXc41ecYpG', 2, 'none.png'),
+(43, 'Bintang', 'Demak', 'Jawa Tengah', '62821482648124', '6289659256947', 'bintang@gmail.com', 'Pria', '2006-11-16', '2131231231312545456', '$2y$10$XrkhWh06AYzkzboNkzpv1eGj0XzCbWa70U3o6L1PT/P7c1dfA4IXq', 2, 'none.png'),
+(44, 'Yayan Rif\'an Awaludin', 'Pemalang', 'Jawa Tengah', '6283123951548', '6283123951548', 'yayan@gmail.com', 'Pria', '2005-01-06', '234532124325235435', '$2y$10$QTjpjontq794x1EAGdMt6.0i0SRPzSNEcGMYw.Rg.niapQ3Iw7s6S', 2, 'none.png'),
+(45, 'Rizky Abdul', 'Kendal', 'Jawa Tengah', '6289530822040', '6289530822040', 'rizky@gmail.com', 'Pria', '2005-06-25', '23432453543325324534', '$2y$10$LZME3VvVFZgTxwW.ORzEiedgZiA4t7ukaZ/bHJl9Cv0uZGpJ75Agu', 2, 'none.png'),
+(46, 'Kelvin Arip Pratama', 'Jambi', 'Sumatra', '6282214149104', '6282214149104', 'kelvin@gmail.com', 'Pria', '2004-07-27', '32423423423423', '$2y$10$z0MYlTVZD6JbxgVSxaP63eExNI3uAEwc06tZF6sGjyt5rCI2sTrrK', 2, '676bbf9028693.png');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `hak_akses`
+-- Indexes for table `hak_akses`
 --
 ALTER TABLE `hak_akses`
   ADD PRIMARY KEY (`id_akses`);
 
 --
--- Indeks untuk tabel `info_kost`
+-- Indexes for table `info_kost`
 --
 ALTER TABLE `info_kost`
   ADD PRIMARY KEY (`id_kost`),
   ADD KEY `id_pengguna` (`id_pengguna`);
 
 --
--- Indeks untuk tabel `jenis_pengeluaran`
+-- Indexes for table `jenis_pengeluaran`
 --
 ALTER TABLE `jenis_pengeluaran`
   ADD PRIMARY KEY (`id_jenis_pengeluaran`);
 
 --
--- Indeks untuk tabel `jenis_status_pembayaran`
+-- Indexes for table `jenis_status_pembayaran`
 --
 ALTER TABLE `jenis_status_pembayaran`
   ADD PRIMARY KEY (`id_status`);
 
 --
--- Indeks untuk tabel `kamar`
+-- Indexes for table `kamar`
 --
 ALTER TABLE `kamar`
   ADD PRIMARY KEY (`id_kamar`);
 
 --
--- Indeks untuk tabel `menghuni`
+-- Indexes for table `menghuni`
 --
 ALTER TABLE `menghuni`
   ADD PRIMARY KEY (`id_menghuni`),
@@ -310,7 +307,7 @@ ALTER TABLE `menghuni`
   ADD KEY `id_pengguna` (`id_pengguna`);
 
 --
--- Indeks untuk tabel `pembayaran`
+-- Indexes for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
@@ -318,7 +315,7 @@ ALTER TABLE `pembayaran`
   ADD KEY `id_status` (`id_status`);
 
 --
--- Indeks untuk tabel `pengeluaran`
+-- Indexes for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
   ADD PRIMARY KEY (`id_pengeluaran`),
@@ -326,97 +323,103 @@ ALTER TABLE `pengeluaran`
   ADD KEY `pengeluaran_ibfk_2` (`id_pengguna`);
 
 --
--- Indeks untuk tabel `pengguna`
+-- Indexes for table `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`),
   ADD KEY `id_akses` (`id_akses`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `hak_akses`
+-- AUTO_INCREMENT for table `hak_akses`
 --
 ALTER TABLE `hak_akses`
   MODIFY `id_akses` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `info_kost`
+-- AUTO_INCREMENT for table `info_kost`
 --
 ALTER TABLE `info_kost`
   MODIFY `id_kost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_pengeluaran`
+-- AUTO_INCREMENT for table `jenis_pengeluaran`
 --
 ALTER TABLE `jenis_pengeluaran`
   MODIFY `id_jenis_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_status_pembayaran`
+-- AUTO_INCREMENT for table `jenis_status_pembayaran`
 --
 ALTER TABLE `jenis_status_pembayaran`
   MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `kamar`
+-- AUTO_INCREMENT for table `kamar`
 --
 ALTER TABLE `kamar`
-  MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `menghuni`
+-- AUTO_INCREMENT for table `menghuni`
 --
 ALTER TABLE `menghuni`
-  MODIFY `id_menghuni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_menghuni` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT untuk tabel `pembayaran`
+-- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT untuk tabel `pengeluaran`
+-- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
   MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT for table `pengguna`
+--
+ALTER TABLE `pengguna`
+  MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `info_kost`
+-- Constraints for table `info_kost`
 --
 ALTER TABLE `info_kost`
   ADD CONSTRAINT `info_kost_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `menghuni`
+-- Constraints for table `menghuni`
 --
 ALTER TABLE `menghuni`
   ADD CONSTRAINT `menghuni_ibfk_1` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `menghuni_ibfk_2` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `pembayaran`
+-- Constraints for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
   ADD CONSTRAINT `pembayaran_ibfk_1` FOREIGN KEY (`id_menghuni`) REFERENCES `menghuni` (`id_menghuni`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pembayaran_ibfk_2` FOREIGN KEY (`id_status`) REFERENCES `jenis_status_pembayaran` (`id_status`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `pengeluaran`
+-- Constraints for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
   ADD CONSTRAINT `pengeluaran_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pengeluaran_ibfk_2` FOREIGN KEY (`id_jenis_pengeluaran`) REFERENCES `jenis_pengeluaran` (`id_jenis_pengeluaran`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `pengguna`
+-- Constraints for table `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD CONSTRAINT `pengguna_ibfk_1` FOREIGN KEY (`id_akses`) REFERENCES `hak_akses` (`id_akses`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -2,17 +2,18 @@
 include 'koneksi.php';
 
 // proses update data pengguna
+// proses update data pengguna
 if (isset($_POST['update_pengguna'])) {
   $id = $_POST['id'];
-  $nik = $_POST['nik'];
-  $nama = $_POST['nama'];
-  $tgl = $_POST['tgl'];
-  $kelamin = $_POST['jKelamin'];
-  $alamat = $_POST['alamat'];
-  $provinsi = $_POST['provinsi'];
-  $kontak_darurat = $_POST['kontak_darurat'];
-  $telepon = $_POST['telepon'];
-  $email = $_POST['email'];
+  $nik = mysqli_real_escape_string($conn, $_POST['nik']);
+  $nama = mysqli_real_escape_string($conn, $_POST['nama']);
+  $tgl = mysqli_real_escape_string($conn, $_POST['tgl']);
+  $kelamin = mysqli_real_escape_string($conn, $_POST['jKelamin']);
+  $alamat = mysqli_real_escape_string($conn, $_POST['alamat']);
+  $provinsi = mysqli_real_escape_string($conn, $_POST['provinsi']);
+  $kontak_darurat = mysqli_real_escape_string($conn, $_POST['kontak_darurat']);
+  $telepon = mysqli_real_escape_string($conn, $_POST['telepon']);
+  $email = mysqli_real_escape_string($conn, $_POST['email']);
 
   $fotoProfil = upload();
 
@@ -26,7 +27,18 @@ if (isset($_POST['update_pengguna'])) {
     return false;
   }
 
-  $query = "UPDATE pengguna SET nama_pengguna = '$nama', alamat_pengguna = '$alamat', provinsi_pengguna = '$provinsi', kontak_darurat = '$kontak_darurat', telepon_pengguna = '$telepon', email_pengguna = '$email', kelamin_pengguna = '$kelamin', tanggal_lahir_pengguna = '$tgl', no_ktp_pengguna = '$nik', foto_pengguna = '$fotoProfil' WHERE id_pengguna = $id";
+  $query = "UPDATE pengguna SET 
+              nama_pengguna = '$nama', 
+              alamat_pengguna = '$alamat', 
+              provinsi_pengguna = '$provinsi', 
+              kontak_darurat = '$kontak_darurat', 
+              telepon_pengguna = '$telepon', 
+              email_pengguna = '$email', 
+              kelamin_pengguna = '$kelamin', 
+              tanggal_lahir_pengguna = '$tgl', 
+              no_ktp_pengguna = '$nik', 
+              foto_pengguna = '$fotoProfil' 
+            WHERE id_pengguna = $id";
 
   if (mysqli_query($conn, $query)) {
     echo "
@@ -44,6 +56,7 @@ if (isset($_POST['update_pengguna'])) {
           ";
   }
 }
+
 
 // proses update data profil
 if (isset($_POST['update_profil'])) {

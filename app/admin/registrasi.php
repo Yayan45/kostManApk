@@ -303,13 +303,13 @@ if (!isset($_SESSION['akun_id'])) {
                                                             </div>
                                                         </div>
 
-                                                        <!-- Kota -->
+                                                        <!-- Kontak darurat -->
                                                         <div class="form-group">
-                                                            <label for="">Kota</label>
+                                                            <label for="">Kontak Darurat</label>
                                                             <input type="text" class="form-control form-control-user" id="inputKota"
-                                                                placeholder="Kota" name="kota_reg" required>
+                                                                placeholder="kontak darurat" name="kontak_darurat_reg" required>
                                                             <div class="invalid-feedback">
-                                                                Harap isi Kota anda.
+                                                                Harap isi Kontak Darurat anda.
                                                             </div>
                                                         </div>
 
