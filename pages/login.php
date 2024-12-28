@@ -20,14 +20,13 @@ include '../actions/koneksi.php';
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
     <div class="login-container">
         <!-- Left section with image -->
-        <div class="image-section"></div>
 
         <!-- Right section with login form -->
         <div class="form-section">
             <h3>Selamat Datang!</h3>
             <form action="../actions/process-signin.php" method="POST" novalidate>
                 <div class="mb-3">
-                    <label for="email_login" class="form-label">email</label>
+                    <label for="email_login" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email_login" name="email_login" placeholder="Masukkan email Anda">
                 </div>
                 <div class="mb-3">
