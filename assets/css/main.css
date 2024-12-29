@@ -51,6 +51,11 @@
   --surface-color: #4668a2;
   --contrast-color: #ffffff;
 }
+.services {
+  padding: 50px 0;
+}
+
+
 
 /* Smooth scroll */
 :root {
@@ -853,10 +858,13 @@ section,
   padding: 120px 0 60px 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-image: url("../img/depankost.jpg");
-  background-size: cover; 
+  background-size: cover; /* Menutupi seluruh elemen */
+  background-position: center; /* Memastikan gambar tetap terpusat */
   height: auto;
 }
+
 .hero::before {
   content: ''; 
   position: absolute;
