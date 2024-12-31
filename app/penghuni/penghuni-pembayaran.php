@@ -218,7 +218,6 @@ if (!isset($_SESSION['akun_id'])) {
           $dataPembayaran2 = mysqli_fetch_array($result2);
           $row = mysqli_num_rows($result);
 
-          $totalDenda = $selisih * $dataPembayaran2['denda'];
 
           // cek apakah sudah membayar bulan ini
           if ($row > 0) {
@@ -312,14 +311,6 @@ if (!isset($_SESSION['akun_id'])) {
                             <td><?php echo strtoupper($dataPembayaran2['nama_pengguna']); ?></td>
                           </tr>
                           <tr>
-                            <td class="font-weight-bold" width="30%">Denda</td>
-                            <td><?php echo 'Rp. ' . number_format($totalDenda); ?></td>
-                          </tr>
-                          <tr>
-                            <td class="font-weight-bold" width="30%">Total Harus Dibayar</td>
-                            <td><?php echo 'Rp. ' . number_format($dataPembayaran2['harga_total'] + $totalDenda); ?></td>
-                          </tr>
-                          <tr>
                             <td class="font-weight-bold" width="30%">Cara Pembayaran</td>
                             <td class="font-weight-bold text-success">Lakukan pembayaran kamar offline(menemui bapak rudi langsung) atau transfer ke <br><br>(Rekening no. 136-000-002-692-9 [MANDIRI] A.N. RUDY INDROYUWONO) <br><br> Foto/Scan Bukti pembayaran dan upload saat melakukan pembayaran</td>
                           </tr>
@@ -327,10 +318,6 @@ if (!isset($_SESSION['akun_id'])) {
                       </table>
                       <form action="../../actions/process-insert.php" method="POST" enctype="multipart/form-data">
 
-                        <div class="form-group">
-                          <input value="<?php echo ($dataPembayaran2['harga_total'] + $totalDenda); ?>" type="hidden" class="form-control" id="nominal" name="nominal"
-                            aria-describedby="nominal" placeholder="Masukkan nominal pembayaran" required>
-                        </div>
                         <div class="form-group">
                           <input value="2" type="hidden" class="form-control" id="status" name="status"
                             aria-describedby="status" placeholder="Masukkan nominal pembayaran" required>
