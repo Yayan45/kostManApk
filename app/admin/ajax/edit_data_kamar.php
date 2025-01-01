@@ -56,11 +56,6 @@ if (isset($_POST['id_kamar'])) {
           aria-describedby="hargaBulanan" placeholder="Masukkan harga bulanan baru" required>
       </div>
       <div class="form-group">
-        <label for="denda">Denda</label>
-        <input value="<?php echo $data['denda']; ?>" type="text" class="form-control" id="denda"
-          name="denda" aria-describedby="denda" placeholder="Masukkan denda baru" required>
-      </div>
-      <div class="form-group">
         <label for="profil">Foto Kamar</label>
         <input value="<?php echo $data['foto_kamar']; ?>" type="file" class="form-control-file" id="profil" name="profil" aria-describedby="profil" accept="image/*">
       </div>

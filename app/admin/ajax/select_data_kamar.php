@@ -10,8 +10,6 @@ if (!isset($_SESSION['akun_id'])) {
 } elseif (isset($_SESSION['akun_id'])) {
     if ($_SESSION['hak_akses'] == 2) {
         header("location: ../../penghuni/penghuni-dashboard.php");
-    } elseif ($_SESSION['hak_akses'] == 3) {
-        header("location: ../../calon-penghuni/calon-dashboard.php");
     }
 }
 
@@ -26,8 +24,7 @@ if (isset($_POST['id_kamar'])) {
             kamar.lantai_kamar, 
             kamar.kapasitas_kamar, 
             kamar.deskripsi_kamar, 
-            kamar.harga_bulanan, 
-            kamar.denda 
+            kamar.harga_bulanan 
         FROM kamar 
         WHERE kamar.id_kamar = '$id_kamar'
     ";
@@ -65,10 +62,6 @@ if (isset($_POST['id_kamar'])) {
                         <tr>
                             <td class="font-weight-bold" width="30%">Harga Bulanan</td>
                             <td><?php echo 'Rp ' . number_format($data['harga_bulanan']); ?></td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold" width="30%">Denda (Jika Melewati Tenggat Pembayaran)</td>
-                            <td><?php echo 'Rp ' . number_format($data['denda']); ?></td>
                         </tr>
                     </tbody>
                 </table>

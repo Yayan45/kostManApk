@@ -27,7 +27,6 @@ if (isset($_POST['id_menghuni'])) {
         kamar.luas_kamar, 
         kamar.lantai_kamar,
         kamar.harga_bulanan AS harga_bulanan_total, 
-        kamar.denda, 
         kamar.harga_bulanan, 
         kamar.deskripsi_kamar 
     FROM 
@@ -81,10 +80,6 @@ if (isset($_POST['id_menghuni'])) {
                         <tr>
                             <td class="font-weight-bold" width="30%">Total Harga Bulanan</td>
                             <td><?php echo 'Rp ' . number_format($data['harga_bulanan_total']); ?></td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold" width="30%">Denda (Jika Melewati Tenggat Pembayaran)</td>
-                            <td><?php echo 'Rp ' . number_format($data['denda']); ?></td>
                         </tr>
                     </tbody>
                 </table>

@@ -2,40 +2,9 @@
 include 'koneksi.php';
 require_once 'process-update.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-
-use PHPMailer\PHPMailer\Exception;
-
-require 'PHPMailer/src/Exception.php';
-
-require 'PHPMailer/src/PHPMailer.php';
-
-require 'PHPMailer/src/SMTP.php';
 
 session_start();
 
-if (isset($_POST['submitJenisLayanan'])) {
-  $nama_layanan = $_POST['inputLayanan'];
-  $harga = $_POST['inputHarga'];
-
-  $query = "INSERT INTO layanan (nama_layanan, harga_bulanan) VALUES ('$nama_layanan', $harga)";
-
-  if (mysqli_query($conn, $query)) {
-    echo "
-            <script>
-              alert ('Berhasil menambah layanan');
-              document.location.href = '../app/admin/admin-data-layanan.php';
-            </script>
-          ";
-  } else {
-    echo "
-            <script>
-              alert ('Gagal menambah layanan');
-              document.location.href = '../app/admin/admin-data-layanan.php';
-            </script>
-          ";
-  }
-}
 
 if (isset($_POST['submitJenisPengeluaran'])) {
   $kode = $_POST['inputKode'];
@@ -90,7 +59,6 @@ if (isset($_POST['submitKamar'])) {
   $kapasitas = $_POST['kapasitas'];
   $deskripsi = $_POST['deskripsi'];
   $hargaBulanan = $_POST['hargaBulanan'];
-  $denda = $_POST['denda'];
 
   $fotoKamar = upload();
 
@@ -104,7 +72,7 @@ if (isset($_POST['submitKamar'])) {
     return false;
   }
 
-  $query = "INSERT INTO kamar (id_kamar, nomor_kamar, luas_kamar, lantai_kamar, kapasitas_kamar, deskripsi_kamar, harga_bulanan, denda, foto_kamar) VALUES ('', '$nomorKamar', '$luas', '$lantai',  '$kapasitas', '$deskripsi', '$hargaBulanan', '$denda', '$fotoKamar')";
+  $query = "INSERT INTO kamar (id_kamar, nomor_kamar, luas_kamar, lantai_kamar, kapasitas_kamar, deskripsi_kamar, harga_bulanan, foto_kamar) VALUES ('', '$nomorKamar', '$luas', '$lantai',  '$kapasitas', '$deskripsi', '$hargaBulanan', '$fotoKamar')";
 
   if (mysqli_query($conn, $query)) {
     echo "
