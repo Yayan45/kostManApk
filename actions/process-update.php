@@ -482,7 +482,6 @@ if (isset($_POST['update_kamar'])) {
   $kapasitas = $_POST['kapasitas'];
   $deskripsi = $_POST['deskripsi'];
   $hargaBulanan = $_POST['hargaBulanan'];
-  $denda = $_POST['denda'];
 
   $fotoKamar = upload();
 
@@ -496,7 +495,7 @@ if (isset($_POST['update_kamar'])) {
     return false;
   }
 
-  $query = "UPDATE kamar SET nomor_kamar = '$nomorKamar', luas_kamar = '$luas', lantai_kamar = '$lantai', kapasitas_kamar = '$kapasitas', deskripsi_kamar = '$deskripsi', harga_bulanan = '$hargaBulanan', denda = '$denda', foto_kamar = '$fotoKamar' WHERE id_kamar = '$id'";
+  $query = "UPDATE kamar SET nomor_kamar = '$nomorKamar', luas_kamar = '$luas', lantai_kamar = '$lantai', kapasitas_kamar = '$kapasitas', deskripsi_kamar = '$deskripsi', harga_bulanan = '$hargaBulanan', foto_kamar = '$fotoKamar' WHERE id_kamar = '$id'";
 
   if (mysqli_query($conn, $query)) {
     echo "
