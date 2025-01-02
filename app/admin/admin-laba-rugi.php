@@ -10,8 +10,6 @@ if (!isset($_SESSION['akun_id'])) {
 } elseif (isset($_SESSION['akun_id'])) {
   if ($_SESSION['hak_akses'] == 2) {
     header("location: ../penghuni/penghuni-dashboard.php");
-  } elseif ($_SESSION['hak_akses'] == 3) {
-    header("location: ../calon-penghuni/calon-dashboard.php");
   }
 }
 
@@ -553,7 +551,27 @@ if (!isset($_SESSION['akun_id'])) {
         }
       });
     </script>
-
+    <script>
+      $(document).ready(function() {
+        $('#sidebarToggleTop').on('click', function() {
+          $('#accordionSidebar').toggleClass('toggled');
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+        $('#sidebarToggle').on('click', function() {
+          $('#accordionSidebar').toggleClass('toggled');
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+        $('#sidebarToggle').on('click', function() {
+          $('#accordionSidebar').toggleClass('toggled');
+        });
+      });
+    </script>
 </body>
 
 </html>

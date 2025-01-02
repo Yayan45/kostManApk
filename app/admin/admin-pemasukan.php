@@ -261,9 +261,8 @@ if (!isset($_SESSION['akun_id'])) {
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <span class="h3 mb-0 text-gray-800">Pemasukan</span>
 
-            <!-- button tambah -->
-            <button class="btn btn-sm btn-primary btn-icon-split float-right" data-toggle="modal"
-              data-target="#tambah-pengeluaran">
+            <!-- Button Tambah -->
+            <button class="btn btn-sm btn-primary btn-icon-split" data-bs-toggle="modal" data-bs-target="#tambah-pengeluaran">
               <span class="icon text-white-50">
                 <i class="fas fa-plus"></i>
               </span>
@@ -271,21 +270,18 @@ if (!isset($_SESSION['akun_id'])) {
             </button>
           </div>
 
-
-
-
-          <!-- DataTales Example -->
+          <!-- Card untuk DataTales -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Data Pemasukan</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
+                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+                  <thead class="thead-light">
                     <tr>
                       <th>No.</th>
-                      <th class="d-none">ID Pembayaran</th>
+                      <th class="d-none d-md-table-cell">ID Pembayaran</th>
                       <th>Kamar</th>
                       <th>Penghuni</th>
                       <th>Tanggal Pembayaran</th>
@@ -297,7 +293,7 @@ if (!isset($_SESSION['akun_id'])) {
                   <tfoot>
                     <tr>
                       <th>No.</th>
-                      <th class="d-none">ID Pembayaran</th>
+                      <th class="d-none d-md-table-cell">ID Pembayaran</th>
                       <th>Kamar</th>
                       <th>Penghuni</th>
                       <th>Tanggal Pembayaran</th>
@@ -309,15 +305,14 @@ if (!isset($_SESSION['akun_id'])) {
                   <tbody>
                     <?php
                     $query = "SELECT pembayaran.id_pembayaran, kamar.nomor_kamar, pengguna.nama_pengguna, 
-pembayaran.tanggal_pembayaran, pembayaran.nilai_pembayaran, pengguna.telepon_pengguna, 
-pembayaran.keterangan, jenis_status_pembayaran.nama_status_pembayaran
-FROM pembayaran
-JOIN menghuni ON pembayaran.id_menghuni = menghuni.id_menghuni
-JOIN kamar ON menghuni.id_kamar = kamar.id_kamar
-JOIN pengguna ON menghuni.id_pengguna = pengguna.id_pengguna
-JOIN jenis_status_pembayaran ON pembayaran.id_status = jenis_status_pembayaran.id_status
-ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
-
+                    pembayaran.tanggal_pembayaran, pembayaran.nilai_pembayaran, pengguna.telepon_pengguna, 
+                    pembayaran.keterangan, jenis_status_pembayaran.nama_status_pembayaran
+                    FROM pembayaran
+                    JOIN menghuni ON pembayaran.id_menghuni = menghuni.id_menghuni
+                    JOIN kamar ON menghuni.id_kamar = kamar.id_kamar
+                    JOIN pengguna ON menghuni.id_pengguna = pengguna.id_pengguna
+                    JOIN jenis_status_pembayaran ON pembayaran.id_status = jenis_status_pembayaran.id_status
+                    ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
 
                     $hasil = mysqli_query($conn, $query);
                     $no = 1;
@@ -335,28 +330,23 @@ ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
                     ?>
                       <tr>
                         <td><?php echo $no; ?></td>
-                        <td class="d-none"><?php echo $id_pembayaran; ?></td>
+                        <td class="d-none d-md-table-cell"><?php echo $id_pembayaran; ?></td>
                         <td><?php echo 'No. ' . $nomor_kamar; ?></td>
                         <td><?php echo $nama_pengguna; ?></td>
                         <td><?php echo $tanggal_pembayaran; ?></td>
-                        <td><?php echo 'Rp. ' . number_format($nilai_pembayaran); ?></td>
+                        <td><?php echo 'Rp. ' . number_format($nilai_pembayaran, 0, ',', '.'); ?></td>
                         <td><?php echo $status_pembayaran; ?></td>
-                        <td>
-                          <button name="view" type="button" value="view" id="<?php echo $id_pembayaran; ?>"
-                            class="btn btn-secondary btn-circle btn-sm view_data m-1" title="Lihat Detail">
+                        <td class="text-nowrap">
+                          <button name="view" type="button" value="view" id="<?php echo $id_pembayaran; ?>" class="btn btn-secondary btn-circle btn-sm view_data m-1" title="Lihat Detail">
                             <i class="fas fa-eye"></i>
                           </button>
-                          <button type="button" class="btn btn-primary btn-circle btn-sm m-1 edit_data"
-                            title="Edit Data Pembayaran" name="edit" value="edit" id="edit">
+                          <button type="button" class="btn btn-primary btn-circle btn-sm m-1 edit_data" title="Edit Data Pembayaran" name="edit" value="edit" id="edit">
                             <i class="fas fa-pen"></i>
                           </button>
-                          <a href="../../actions/process-delete.php?id_hapus_pembayaran=<?php echo $id_pembayaran; ?>"
-                            class="btn btn-danger btn-circle btn-sm m-1" title="Hapus Data Kamar"
-                            onclick="return confirm('Anda yakin ingin menghapus data ini? Data yang dihapus tidak dapat dikembalikan!');">
+                          <a href="../../actions/process-delete.php?id_hapus_pembayaran=<?php echo $id_pembayaran; ?>" class="btn btn-danger btn-circle btn-sm m-1" title="Hapus Data Kamar" onclick="return confirm('Anda yakin ingin menghapus data ini? Data yang dihapus tidak dapat dikembalikan!');">
                             <i class="fas fa-trash"></i>
                           </a>
-                          <a href="<?php echo $url; ?>" target="_blank" id="kirim-whatsapp-<?php echo $id_pembayaran; ?>"
-                            class="btn btn-success btn-circle btn-sm m-1" title="Kirim chat konfirmasi pembayaran">
+                          <a href="<?php echo $url; ?>" target="_blank" id="kirim-whatsapp-<?php echo $id_pembayaran; ?>" class="btn btn-success btn-circle btn-sm m-1" title="Kirim chat konfirmasi pembayaran">
                             <i class="fab fa-whatsapp"></i>
                           </a>
                         </td>
@@ -371,8 +361,6 @@ ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
             </div>
           </div>
 
-          <!-- End of Main Content -->
-
           <!-- Footer -->
           <footer class="sticky-footer bg-white">
             <div class="container my-auto">
@@ -381,9 +369,8 @@ ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
               </div>
             </div>
           </footer>
-          <!-- End of Footer -->
-
         </div>
+
         <!-- End of Content Wrapper -->
 
       </div>
@@ -609,7 +596,20 @@ ORDER BY pembayaran.id_status DESC, pembayaran.tanggal_pembayaran DESC";
             });
           });
         </script>
-
+        <script>
+          $(document).ready(function() {
+            $('#sidebarToggleTop').on('click', function() {
+              $('#accordionSidebar').toggleClass('toggled');
+            });
+          });
+        </script>
+        <script>
+          $(document).ready(function() {
+            $('#sidebarToggle').on('click', function() {
+              $('#accordionSidebar').toggleClass('toggled');
+            });
+          });
+        </script>
 </body>
 
 </html>

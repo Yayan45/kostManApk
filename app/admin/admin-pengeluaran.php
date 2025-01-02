@@ -572,6 +572,20 @@ if (!isset($_SESSION['akun_id'])) {
         });
       </script>
 
+      <script>
+        $(document).ready(function() {
+          $('#sidebarToggleTop').on('click', function() {
+            $('#accordionSidebar').toggleClass('toggled');
+          });
+        });
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('#sidebarToggle').on('click', function() {
+            $('#accordionSidebar').toggleClass('toggled');
+          });
+        });
+      </script>
 </body>
 
 </html>

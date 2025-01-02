@@ -263,10 +263,9 @@ if (!isset($_SESSION['akun_id'])) {
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <span class="m-0 font-weight-bold text-primary">Master Data Jenis Pengeluaran</span>
 
               <!-- button tambah -->
-              <button class="btn btn-sm btn-primary btn-icon-split float-right" data-toggle="modal"
+              <button class="btn btn-sm btn-primary btn-icon-split float-left" data-toggle="modal"
                 data-target="#tambahJenisPengeluaran">
                 <span class="icon text-white-50">
                   <i class="fas fa-plus"></i>
@@ -486,6 +485,22 @@ if (!isset($_SESSION['akun_id'])) {
         });
       });
     </script>
+    <script>
+      $(document).ready(function() {
+        $('#sidebarToggleTop').on('click', function() {
+          $('#accordionSidebar').toggleClass('toggled');
+        });
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        $('#sidebarToggle').on('click', function() {
+          $('#accordionSidebar').toggleClass('toggled');
+        });
+      });
+    </script>
+
 </body>
 
 </html>

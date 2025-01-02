@@ -185,7 +185,6 @@ if (!isset($_SESSION['akun_id'])) {
         <div class="container-fluid">
 
           <!-- Page Heading -->
-
           <div class="d-sm-flex align-items-center justify-content-between mb-3">
             <div class="card col-12">
               <div class="card-body">
@@ -200,55 +199,58 @@ if (!isset($_SESSION['akun_id'])) {
                   $result = mysqli_query($conn, $query);
 
                   while ($data = mysqli_fetch_array($result)) {
-
                 ?>
-                    <div class="container-fluid pr-3">
-                      <img src="../../assets/img/uploadDb/<?php echo $data['foto_pengguna']; ?>" alt="<?php echo $data['nama_pengguna']; ?>" class="img-thumbnail mx-auto d-block mb-3 rounded" width="300px">
-
-                      <div class="table-respomsive pr-3">
-                        <table class="table">
-                          <tbody>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">NIK</td>
-                              <td><?php echo $data['no_ktp_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Nama</td>
-                              <td><?php echo $data['nama_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Tanggal Lahir</td>
-                              <td><?php echo $data['tanggal_lahir_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Jenis Kelamin</td>
-                              <td><?php echo $data['kelamin_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Alamat</td>
-                              <td><?php echo $data['alamat_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Provinsi</td>
-                              <td><?php echo $data['provinsi_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Kontak Darurat</td>
-                              <td><?php echo $data['kontak_darurat']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Telepon</td>
-                              <td><?php echo $data['telepon_pengguna']; ?></td>
-                            </tr>
-                            <tr>
-                              <td class="font-weight-bold" width="30%">Email</td>
-                              <td><?php echo $data['email_pengguna']; ?></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    <div class="row">
+                      <!-- Profile Picture -->
+                      <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-3">
+                        <img src="../../assets/img/uploadDb/<?php echo $data['foto_pengguna']; ?>" alt="<?php echo $data['nama_pengguna']; ?>" class="img-fluid rounded-circle shadow" width="200px">
                       </div>
-                      <button class="btn btn-success btn-block edit_data" id="<?php echo $data['id_pengguna']; ?>">Edit
-                        Profil</button>
+                      <!-- Profile Details -->
+                      <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">NIK</td>
+                                <td><?php echo $data['no_ktp_pengguna']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Nama</td>
+                                <td><?php echo $data['nama_pengguna']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Tanggal Lahir</td>
+                                <td><?php echo $data['tanggal_lahir_pengguna']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Jenis Kelamin</td>
+                                <td><?php echo $data['kelamin_pengguna']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Alamat</td>
+                                <td><?php echo $data['alamat_pengguna']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Provinsi</td>
+                                <td><?php echo $data['provinsi_pengguna']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Kontak Darurat</td>
+                                <td><?php echo $data['kontak_darurat']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Telepon</td>
+                                <td><?php echo $data['telepon_pengguna']; ?></td>
+                              </tr>
+                              <tr>
+                                <td class="font-weight-bold" width="30%">Email</td>
+                                <td><?php echo $data['email_pengguna']; ?></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <button class="btn btn-success btn-block mt-3 edit_data" id="<?php echo $data['id_pengguna']; ?>">Edit Profil</button>
+                      </div>
                     </div>
                 <?php
                   }
@@ -257,130 +259,146 @@ if (!isset($_SESSION['akun_id'])) {
               </div>
             </div>
           </div>
-
-          <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; TechSolutions-2024</span>
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
+
+        <!-- /.container-fluid -->
 
       </div>
-      <!-- End of Content Wrapper -->
+      <!-- End of Main Content -->
 
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ingin Keluar Aplikasi?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Pilih "Logout" dibawah jika anda ingin mengakhiri sesi.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="../../actions/process-logout.php">Logout</a>
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; TechSolutions-2024</span>
           </div>
         </div>
-      </div>
-    </div>
+      </footer>
+      <!-- End of Footer -->
 
-    <!-- update Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Edit Data Pengguna</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="detail_edit">
-          </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ingin Keluar Aplikasi?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Pilih "Logout" dibawah jika anda ingin mengakhiri sesi.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="../../actions/process-logout.php">Logout</a>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- update Modal -->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Edit Data Pengguna</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="detail_edit">
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="../../vendor/jquery/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 
 
-    <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="../../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="../../vendor/chart.js/Chart.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="../../vendor/chart.js/Chart.min.js"></script>
 
-    <script>
-      $(document).ready(function() {
+  <script>
+    $(document).ready(function() {
 
-        // untuk view data
-        $('.edit_data').on('click', function() {
-          var id_pengguna = $(this).attr('id');
-          console.log(id_pengguna);
-          $.ajax({
-            url: "ajax/edit_data_penghuni.php",
-            method: "post",
-            data: {
-              id_profil: id_pengguna
-            },
-            success: function(data) {
-              $('#detail_edit').html(data);
-              $('#updateModal').modal();
-            }
-          });
+      // untuk view data
+      $('.edit_data').on('click', function() {
+        var id_pengguna = $(this).attr('id');
+        console.log(id_pengguna);
+        $.ajax({
+          url: "ajax/edit_data_penghuni.php",
+          method: "post",
+          data: {
+            id_profil: id_pengguna
+          },
+          success: function(data) {
+            $('#detail_edit').html(data);
+            $('#updateModal').modal();
+          }
         });
-
-        // // edit data
-        // $('.edit_data').on('click', function () {
-        //   var $tr = $(this).closest('tr');
-
-        //   var data = $tr.children("td").map(function () {
-        //     return $(this).text();
-        //   }).get();
-
-        //   var id_pengguna = data[1];
-
-        //   $.ajax({
-        //     url: "ajax/edit_data_penghuni.php",
-        //     method: "post",
-        //     data: {
-        //       id_pengguna: id_pengguna
-        //     },
-        //     success: function (data) {
-        //       $('#detail_edit').html(data);
-        //       $('#updateModal').modal();
-        //     }
-        //   });
-        // });
       });
-    </script>
+
+      // // edit data
+      // $('.edit_data').on('click', function () {
+      //   var $tr = $(this).closest('tr');
+
+      //   var data = $tr.children("td").map(function () {
+      //     return $(this).text();
+      //   }).get();
+
+      //   var id_pengguna = data[1];
+
+      //   $.ajax({
+      //     url: "ajax/edit_data_penghuni.php",
+      //     method: "post",
+      //     data: {
+      //       id_pengguna: id_pengguna
+      //     },
+      //     success: function (data) {
+      //       $('#detail_edit').html(data);
+      //       $('#updateModal').modal();
+      //     }
+      //   });
+      // });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#sidebarToggleTop').on('click', function() {
+        $('#accordionSidebar').toggleClass('toggled');
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#sidebarToggle').on('click', function() {
+        $('#accordionSidebar').toggleClass('toggled');
+      });
+    });
+  </script>
 
 </body>
 

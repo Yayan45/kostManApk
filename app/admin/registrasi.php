@@ -73,7 +73,8 @@ if (!isset($_SESSION['akun_id'])) {
             <li class="nav-item">
                 <a class="nav-link" href="admin-dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -88,7 +89,8 @@ if (!isset($_SESSION['akun_id'])) {
             <li class="nav-item">
                 <a class="nav-link" href="../admin/admin-penghuni.php">
                     <i class="fas fa-fw fa-user-friends"></i>
-                    <span>Penghuni</span></a>
+                    <span>Penghuni</span>
+                </a>
             </li>
 
             <!-- Nav Item - Kamar Collapse Menu -->
@@ -98,7 +100,7 @@ if (!isset($_SESSION['akun_id'])) {
                     <i class="fas fa-fw fa-bed"></i>
                     <span>Kamar</span>
                 </a>
-                <div id="collapseKamar" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseKamar" class="collapse" aria-labelledby="headingKamar" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
                         <a class="collapse-item" href="admin-kamar.php">Data Kamar</a>
@@ -123,31 +125,30 @@ if (!isset($_SESSION['akun_id'])) {
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- Nav Item - Laporan Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaporan" aria-expanded="true"
+                    aria-controls="collapseLaporan">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Laporan</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseLaporan" class="collapse" aria-labelledby="headingLaporan" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
                         <a class="collapse-item" href="admin-laba-rugi.php">Laporan Laba/Rugi</a>
                         <a class="collapse-item" href="admin-tagihan.php">Laporan Pengeluaran</a>
-                        <!-- <a class="collapse-item" href="admin-status-kamar.php">Laporan Status Kamar</a> -->
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - masteData Collapse Menu -->
+            <!-- Nav Item - Master Data Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMaster" aria-expanded="true"
-                    aria-controls="collapseUtilities">
+                    aria-controls="collapseMaster">
                     <i class="fas fa-fw fa-box"></i>
                     <span>Master Data</span>
                 </a>
-                <div id="collapseMaster" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseMaster" class="collapse" aria-labelledby="headingMaster" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
                         <a class="collapse-item" href="admin-jenis-pengeluaran.php">Data Jenis Pengeluaran</a>
@@ -162,7 +163,7 @@ if (!isset($_SESSION['akun_id'])) {
                     <i class="fas fa-fw fa-user"></i>
                     <span>Akun</span>
                 </a>
-                <div id="collapseAkun" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseAkun" class="collapse show" aria-labelledby="headingAkun" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu:</h6>
                         <a class="collapse-item" href="registrasi.php">Registrasi Akun Penghuni</a>
@@ -179,6 +180,7 @@ if (!isset($_SESSION['akun_id'])) {
             </div>
 
         </ul>
+
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -256,338 +258,307 @@ if (!isset($_SESSION['akun_id'])) {
 
                 <!-- Begin Page Content -->
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 mx-auto">
-                                <div class="card o-hidden border-0 shadow-lg my-5">
-                                    <div class="card-body p-0">
-                                        <!-- Nested Row within Card Body -->
-                                        <div class="row">
-                                            <!-- form -->
-                                            <div class="col-lg-12">
-                                                <div class="p-5">
-                                                    <div>
-                                                        <h1 class="text-left font-weight-bold h2 text-gray-900 mb-5">DAFTAR AKUN</h1>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+                            <div class="card o-hidden border-0 shadow-lg my-5">
+                                <div class="card-body p-0">
+                                    <!-- Nested Row within Card Body -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="p-5">
+                                                <div>
+                                                    <h1 class="text-center font-weight-bold h2 text-gray-900 mb-5">DAFTAR AKUN</h1>
+                                                </div>
+
+                                                <!-- Form mulai -->
+                                                <form class="user needs-validation" action="../../actions/process-signup.php" method="POST" novalidate enctype="multipart/form-data">
+                                                    <div class="form-row">
+                                                        <!-- Nama Lengkap -->
+                                                        <div class="form-group col-md-12">
+                                                            <label for="inputNama">Nama Lengkap</label>
+                                                            <input type="text" class="form-control form-control-user" id="inputNama" placeholder="Nama Lengkap" name="nama_lengkap_reg" required>
+                                                            <div class="invalid-feedback">Harap isi nama lengkap anda.</div>
+                                                        </div>
                                                     </div>
 
-                                                    <!-- form mulai -->
-                                                    <form class="user needs-validation" action="../../actions/process-signup.php" method="POST" novalidate>
-                                                        <!-- nama lengkap -->
-                                                        <div class="form-group">
-                                                            <label for="">Nama Lengkap</label>
-                                                            <input type="text" class="form-control form-control-user" id="inputNama"
-                                                                placeholder="Nama Lengkap" name="nama_lengkap_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi nama lengkap anda.
-                                                            </div>
+                                                    <!-- Alamat dan Provinsi -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputAlamat">Alamat</label>
+                                                            <input type="text" class="form-control form-control-user" id="inputAlamat" placeholder="Alamat" name="alamat_reg" required>
+                                                            <div class="invalid-feedback">Harap isi alamat anda.</div>
                                                         </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputProvinsi">Provinsi</label>
+                                                            <input type="text" class="form-control form-control-user" id="inputProvinsi" placeholder="Provinsi" name="provinsi_reg" required>
+                                                            <div class="invalid-feedback">Harap isi provinsi anda.</div>
+                                                        </div>
+                                                    </div>
 
-                                                        <!-- Alamat -->
-                                                        <div class="form-group">
-                                                            <label for="">Alamat</label>
-                                                            <input type="text" class="form-control form-control-user" id="inputAlamat"
-                                                                placeholder="Alamat" name="alamat_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi alamat anda.
-                                                            </div>
+                                                    <!-- Kontak Darurat dan Nomor Telepon -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputKota">Kontak Darurat</label>
+                                                            <input type="text" class="form-control form-control-user" id="inputKota" placeholder="Kontak Darurat" name="kontak_darurat_reg" required>
+                                                            <div class="invalid-feedback">Harap isi kontak darurat anda.</div>
                                                         </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputNomor">Nomor Telepon</label>
+                                                            <input type="text" class="form-control form-control-user" id="inputNomor" placeholder="Nomor Telepon" name="nomor_reg" required>
+                                                            <div class="invalid-feedback">Harap isi nomor telepon anda.</div>
+                                                        </div>
+                                                    </div>
 
-                                                        <!-- Provinsi -->
-                                                        <div class="form-group">
-                                                            <label for="">Provinsi</label>
-                                                            <input type="text" class="form-control form-control-user" id="inputProvinsi"
-                                                                placeholder="Provinsi" name="provinsi_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi Provinsi anda.
-                                                            </div>
+                                                    <!-- Email dan Jenis Kelamin -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputEmail">Email</label>
+                                                            <input type="email" class="form-control form-control-user" id="inputEmail" placeholder="Alamat Email" name="email_reg" required>
+                                                            <div class="invalid-feedback">Harap isi alamat email anda.</div>
                                                         </div>
-
-                                                        <!-- Kontak darurat -->
-                                                        <div class="form-group">
-                                                            <label for="">Kontak Darurat</label>
-                                                            <input type="text" class="form-control form-control-user" id="inputKota"
-                                                                placeholder="kontak darurat" name="kontak_darurat_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi Kontak Darurat anda.
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- no telepon -->
-                                                        <div class="form-group">
-                                                            <label for="">Nomor Telepon</label>
-                                                            <input type="text" class="form-control form-control-user" id="inputNomor"
-                                                                placeholder="Nomor telepon" name="nomor_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi nomor telepon anda.
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- email -->
-                                                        <div class="form-group">
-                                                            <label for="">Email</label>
-                                                            <input type="email" class="form-control form-control-user" id="inputEmail"
-                                                                placeholder="Alamat Email" name="email_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi alamat email anda.
-                                                            </div>
-                                                        </div>
-                                                        <!-- jenis kelamin -->
-                                                        <div class="form-group">
-                                                            <label for="">Jenis Kelamin</label>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputGender">Jenis Kelamin</label>
                                                             <select class="form-control form-control-user" id="inputGender" name="gender_reg" required>
                                                                 <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                                                 <option value="Pria">Pria</option>
                                                                 <option value="Wanita">Wanita</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Harap pilih jenis kelamin anda.
-                                                            </div>
+                                                            <div class="invalid-feedback">Harap pilih jenis kelamin anda.</div>
                                                         </div>
+                                                    </div>
 
-                                                        <!-- tanggal lahir -->
-                                                        <div class="form-group">
+                                                    <!-- Tanggal Lahir dan Nomor KTP -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
                                                             <label for="inputTanggalLahir">Tanggal Lahir</label>
                                                             <input type="date" class="form-control form-control-user" id="inputTanggalLahir" name="tanggal_lahir_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi tanggal lahir anda.
-                                                            </div>
+                                                            <div class="invalid-feedback">Harap isi tanggal lahir anda.</div>
                                                         </div>
-
-                                                        <!-- No Ktp -->
-                                                        <div class="form-group">
-                                                            <label for="">Nomor KTP</label>
-                                                            <input type="number" class="form-control form-control-user" id="inputNomor"
-                                                                placeholder="Nomor KTP" name="nomor_ktp_reg" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap isi nomor KTP anda.
-                                                            </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputKTP">Nomor KTP</label>
+                                                            <input type="number" class="form-control form-control-user" id="inputKTP" placeholder="Nomor KTP" name="nomor_ktp_reg" required>
+                                                            <div class="invalid-feedback">Harap isi nomor KTP anda.</div>
                                                         </div>
+                                                    </div>
 
-                                                        <!-- password -->
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                                <input type="password" class="form-control form-control-user password" id="inputPassword"
-                                                                    placeholder="Password" name="password_reg" required>
-                                                                <div class="invalid-feedback">
-                                                                    Harap isi password untuk akun anda.
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <input type="password" class="form-control form-control-user confpass" id="repeatPassword"
-                                                                    placeholder="Repeat Password" name="password_repeat_reg" required>
-                                                                <div class="invalid-feedback">
-                                                                    Harap isi konfirmasi password untuk akun anda.
-                                                                </div>
-                                                            </div>
+                                                    <!-- Password dan Konfirmasi Password -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <input type="password" class="form-control form-control-user password" id="inputPassword" placeholder="Password" name="password_reg" required>
+                                                            <div class="invalid-feedback">Harap isi password untuk akun anda.</div>
                                                         </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="password" class="form-control form-control-user confpass" id="repeatPassword" placeholder="Repeat Password" name="password_repeat_reg" required>
+                                                            <div class="invalid-feedback">Harap isi konfirmasi password anda.</div>
+                                                        </div>
+                                                    </div>
 
-                                                        <!-- Id Akses -->
-                                                        <div class="form-group">
-                                                            <label for="">Pilih ID Akses</label>
+                                                    <!-- ID Akses dan Foto -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="inputID">Pilih ID Akses</label>
                                                             <select class="form-control form-control-user" id="inputID" name="id-akses_req" required>
                                                                 <option value="" disabled selected>Pilih ID Akses</option>
                                                                 <option value="1">Admin</option>
                                                                 <option value="2">Penghuni</option>
                                                             </select>
-                                                            <div class="invalid-feedback">
-                                                                Harap pilih ID Akses anda.
-                                                            </div>
+                                                            <div class="invalid-feedback">Harap pilih ID akses anda.</div>
                                                         </div>
-
-                                                        <!-- Foto -->
-                                                        <div class="form-group">
+                                                        <div class="form-group col-md-6">
                                                             <label for="inputFoto">Unggah Foto</label>
                                                             <input type="file" class="form-control-file" id="inputFoto" name="foto_reg" accept="image/*" required>
-                                                            <div class="invalid-feedback">
-                                                                Harap unggah foto Anda.
-                                                            </div>
+                                                            <div class="invalid-feedback">Harap unggah foto anda.</div>
                                                         </div>
+                                                    </div>
 
-
-
-                                                        <!-- button submit registrasi -->
-                                                        <button type="submit" name="submit_daftar" id="submit" class="btn btn-primary btn-user btn-block">Daftar</button>
-                                                    </form>
-
-
-                                                    <!-- akhir form -->
-
-                                                </div>
+                                                    <!-- Button submit -->
+                                                    <button type="submit" name="submit_daftar" id="submit" class="btn btn-primary btn-user btn-block">Daftar</button>
+                                                </form>
+                                                <!-- Akhir form -->
                                             </div>
-                                            <!-- akhir form -->
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- End of Main Content -->
-
-                    <!-- Footer -->
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright &copy;TechSolutions-2024</span>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End of Footer -->
-
                 </div>
-                <!-- End of Content Wrapper -->
-
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; TechSolutions-2024</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
             </div>
-            <!-- End of Page Wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+            <!-- End of Content Wrapper -->
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ingin Keluar Aplikasi?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Pilih "Logout" dibawah jika anda ingin mengakhiri sesi.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="../../actions/process-logout.php">Logout</a>
-                        </div>
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ingin Keluar Aplikasi?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Pilih "Logout" dibawah jika anda ingin mengakhiri sesi.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="../../actions/process-logout.php">Logout</a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- view modal -->
-            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Rincian Data Penghuni
-                            </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="detail_pengguna">
+        <!-- view modal -->
+        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Rincian Data Penghuni
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="detail_pengguna">
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- update Modal -->
-            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Edit Data Penghuni</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="detail_edit">
+        <!-- update Modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-primary font-weight-bold" id="exampleModalCenterTitle">Edit Data Penghuni</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="detail_edit">
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Bootstrap core JavaScript-->
-            <script src="../../vendor/jquery/jquery.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- lightbox -->
-            <script src="../../js/lightbox.js"></script>
+        <!-- lightbox -->
+        <script src="../../js/lightbox.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="../../js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../../js/sb-admin-2.min.js"></script>
 
-            <!-- lightbiox css -->
-            <link href="../../css/lightbox.css" rel="stylesheet">
+        <!-- lightbiox css -->
+        <link href="../../css/lightbox.css" rel="stylesheet">
 
-            <!-- Page level plugins -->
-            <script src="../../vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="../../vendor/chart.js/Chart.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="../../js/demo/datatables-demo.js"></script>
-
-
-            <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function() {
-                    'use strict';
-                    window.addEventListener('load', function() {
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation');
-                        // Loop over them and prevent submission
-                        var validation = Array.prototype.filter.call(forms, function(form) {
-                            form.addEventListener('submit', function(event) {
-                                if (form.checkValidity() === false) {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                }
-                                form.classList.add('was-validated');
-                            }, false);
-                        });
-                    }, false);
-                })();
-
-                <?php
-
-                $query = "SELECT * FROM info_kost";
-                $result = mysqli_query($conn, $query);
-
-                while ($data = mysqli_fetch_array($result)) {
-
-                ?>
-
-                    $(function() {
-                        $(".bg-gradient-primary").css({
-                            "background-image": "url(../img/<?php echo $data['foto_kost'] ?>)"
-                        })
-                    })
+        <!-- Page level custom scripts -->
+        <script src="../../js/demo/datatables-demo.js"></script>
 
 
-
-                <?php } ?>
-
-                $(document).ready(function() {
-                    $('#submit').click(function(event) {
-
-                        if ($('.password').val() != $('.confpass').val()) {
-                            alert("Password dan Konfirmasi Password Tidak Sama!");
-                            // Prevent form submission
-                            event.preventDefault();
-                        }
-
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
                     });
+                }, false);
+            })();
+
+            <?php
+
+            $query = "SELECT * FROM info_kost";
+            $result = mysqli_query($conn, $query);
+
+            while ($data = mysqli_fetch_array($result)) {
+
+            ?>
+
+                $(function() {
+                    $(".bg-gradient-primary").css({
+                        "background-image": "url(../img/<?php echo $data['foto_kost'] ?>)"
+                    })
+                })
+
+
+
+            <?php } ?>
+
+            $(document).ready(function() {
+                $('#submit').click(function(event) {
+
+                    if ($('.password').val() != $('.confpass').val()) {
+                        alert("Password dan Konfirmasi Password Tidak Sama!");
+                        // Prevent form submission
+                        event.preventDefault();
+                    }
+
                 });
-            </script>
-
-
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#sidebarToggleTop').on('click', function() {
+                    $('#accordionSidebar').toggleClass('toggled');
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('#sidebarToggle').on('click', function() {
+                    $('#accordionSidebar').toggleClass('toggled');
+                });
+            });
+        </script>
 
 </body>
 
